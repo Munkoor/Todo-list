@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>TODO list</h1>
+<div class="container">
+  <h1 class="mt-5">TODO list</h1>
 
-  {% for task  %}
+  {% if task_list %}
+    <div class="list-group mt-4">
+      {% for task in task_list %}
+        <div class="list-group-item">
+          <p class="mb-1">{{ task.content }}</p>
+          <small>Created: {{ task.created_at }}</small><br>
+          <small>Tags: {% for tag in task.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</small>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="mt-4">There are no tasks in the TODO list</p>
+  {% endif %}
+</div>
 {% endblock %}
