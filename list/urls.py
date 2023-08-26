@@ -7,7 +7,7 @@ from list.views import (
     TagUpdateView,
     TagDeleteView,
     TaskToggleStatusView,
-    TaskCreateView
+    TaskCreateView,
 )
 
 urlpatterns = [
