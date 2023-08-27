@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="mt-7" style="margin-top: 50px;">
+      <div class="row">
+        <div class="col-6">
+          <h1>TODO List</h1>
+        </div>
+        <div class="col-6 text-right">
+          <a href="{% url 'todolist:task-create' %}" class="btn btn-primary btn-lg">Add task</a>
+        </div>
+      </div>
+    </div>
+
+    {% if task_list %}
+      <div class="list-group mt-4">
+        {% for task in task_list %}
+          <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                {% if task.is_completed %}
+                  <p class="mb-1">{{ task.content }}</p> <p style="color: green">Done</p>
+                {% else %}
+                  <p class="mb-1">{{ task.content }}</p> <p style="color: red">Not done</p>
+                {% endif %}
+                <small>Created: {{ task.created_at }}</small><br>
+                <small>Tags: {% for tag in task.tags.all %}{{ tag.name }} <a href="{% url 'todolist:tag-update' pk=tag.id%}">Update</a> <a href="{% url 'todolist:tag-delete' pk=tag.id%}">Delete</a>
+                  {% if not forloop.last %}, {% endif %}{% endfor %}</small>
+              </div>
+              <div>
+                {% if task.is_completed %}
+                <a href="{% url 'todolist:task-toggle-status' task.pk %}" class="btn btn-secondary">Undo</a>
+                {% else %}
+                <a href="{% url 'todolist:task-toggle-status' task.pk %}" class="btn btn-success">Complete</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="mt-4">There are no tasks in the TODO list</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
