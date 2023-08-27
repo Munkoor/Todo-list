@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
 
-from list.models import Task, Tag
+from todolist_app.models import Task, Tag
 
 
 class TasklistView(generic.ListView):

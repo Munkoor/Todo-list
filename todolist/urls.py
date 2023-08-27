@@ -24,5 +24,5 @@ from django.urls import path, include
 urlpatterns = [
     path("", lambda request: redirect("todolist:task-list"), name="home"),
     path('admin/', admin.site.urls),
-    path("todolist/", include("list.urls", namespace="todolist"))
+    path("todolist/", include("todolist_app.urls", namespace="todolist"))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
